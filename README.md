@@ -22,29 +22,36 @@ This script connects to a PostgreSQL database, retrieves the total number of tic
 ```bash
 git clone https://github.com/example/jira-ticket-counter.git
 cd jira-ticket-counter
+```
 
-Install the required Python packages:
-Bash
+2. Install the required Python packages:
+```bash
 pip install -r requirements.txt
+```
 
-Set the environment variables:
-Create a file named .env in the project directory and set the following environment variables:
-Bash
+3. Set the environment variables:
+- Create a file named `.env` in the project directory and set the following environment variables:
+```bash
 DB_HOST=<your_database_host>
 DB_PORT=<your_database_port>
 DB_NAME=<your_database_name>
 DB_USER=<your_database_username>
 DB_PASSWORD=<your_database_password>
+```
 
-Update the JIRA API token:
-In the main.py file, replace Bearer NzM4MDMzMjkyMjA5OnUjGSamWtzkl9sa0VsAydHYPmCL with your JIRA API token.
-Usage
+4. Update the JIRA API token:
+- In the `main.py` file, replace `Bearer NzM4MDMzMjkyMjA5OnUjGSamWtzkl9sa0VsAydHYPmCL` with your `JIRA API` token.
+
+## Usage
 
 Run the script by executing the following command:
 
-Bash
+```bash
 python main.py
+```
 
-Contributing
+## Contributing
 
-Contributions are welcome! Please feel free to create a pull request. ```
+Contributions are welcome! Please feel free to create a pull request.
+
+
