@@ -46,7 +46,8 @@ try:
         data = response.json()  # Retrieve the response data as JSON
         total_tickets = data["total"]  # Extract the total number of tickets
         current_date = date.today()  # Get the current date
-        current_time = datetime.now().time()  # Get the current time
+        # current_time = datetime.now().time()  # Get the current time
+        current_time = datetime.now().replace(second=0, microsecond=0).time()  # Get the current time without seconds
 
         # Insert the total into the "tickets" table in the database
         insert_query = "INSERT INTO tickets (date, time, total) VALUES (%s, %s, %s);"
