@@ -40,7 +40,7 @@ DB_PASSWORD=<your_database_password>
 ```
 
 4. Update the JIRA API token:
-- In the `main.py` file, replace `Bearer NzM4MDMzMjkyMjA5OnUjGSamWtzkl9sa0VsAydHYPmCL` with your `JIRA API` token.
+- In the `main.py` file, replace `Bearer ************************HYPmCL` with your `JIRA API` token.
 
 ## Usage
 
