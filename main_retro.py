@@ -30,7 +30,7 @@ try:
     current_date = date.today()
     num_day = current_date.day
 
-    for i in range(2):
+    for i in range(180):
         params = {
             "jql": 'project = sd911 AND "Группа исполнителей" = TS_MSK_city_team AND "Customer Request Type" not in ("(Офис)Организация нового рабочего места", "Возврат оборудования в ИТ") AND status was in ("В работе") ON \'%s 01:00\'',
             "maxResults": 0,
