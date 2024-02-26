@@ -22,5 +22,12 @@ RUN su - postgres -c "psql -c 'GRANT ALL PRIVILEGES ON DATABASE postgres TO post
 # Подключение к базе данных и создание таблицы
 RUN su - postgres -c "psql -d postgres -c 'CREATE TABLE tickets_retro (id SERIAL PRIMARY KEY, date DATE, total INT);'"
 
-# Запуск вашего приложения
-CMD ["python", "main.py"]
+# Добавление скрипта для запуска ежедневной задачи
+COPY run_daily.sh /app/run_daily.sh
+RUN chmod +x /app/run_daily.sh
+
+# Добавление cron-задачи для запуска скрипта
+RUN echo "0 3 * * * /app/run_daily.sh" >> /etc/crontab
+
+# Запуск cron в фоновом режиме
+CMD ["cron", "-f"]

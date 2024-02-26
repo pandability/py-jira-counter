@@ -1,57 +1,23 @@
-# JIRA Ticket Counter
+Чтобы собрать образ и запустить контейнер, вы будете использовать команды docker build и docker run.
 
-This script connects to a PostgreSQL database, retrieves the total number of tickets from the JIRA API, and stores the total number of tickets, current date, and current time in the database.
+    Сборка образа:
 
-## Prerequisites
+    Перейдите в директорию, содержащую ваш Dockerfile, а затем выполните команду docker build, указав путь к вашей директории проекта и имя для вашего образа с помощью флага -t:
 
-- PostgreSQL database.
-- Python 3 and pip installed.
-- JIRA API account with appropriate token.
-- Environment variables set in a .env file:
-  - `DB_HOST` - PostgreSQL database host
-  - `DB_PORT` - PostgreSQL database port
-  - `DB_NAME` - PostgreSQL database name
-  - `DB_USER` - PostgreSQL database username
-  - `DB_PASSWORD` - PostgreSQL database password
+    bash
 
+docker build -t your_image_name .
 
-## Installation
+Здесь your_image_name - это имя, которое вы выбрали для вашего образа.
 
-1. Clone the repository:
+Запуск контейнера:
 
-```bash
-git clone https://github.com/example/jira-ticket-counter.git
-cd jira-ticket-counter
-```
+После успешного создания образа вы можете запустить контейнер с помощью команды docker run. Укажите имя вашего образа и любые другие опции, которые вам нужны. Если вы хотите, чтобы контейнер выполнялся один раз в день, вы можете использовать ваш скрипт run_daily.sh:
 
-2. Install the required Python packages:
-```bash
-pip install -r requirements.txt
-```
+bash
 
-3. Set the environment variables:
-- Create a file named `.env` in the project directory and set the following environment variables:
-```bash
-DB_HOST=<your_database_host>
-DB_PORT=<your_database_port>
-DB_NAME=<your_database_name>
-DB_USER=<your_database_username>
-DB_PASSWORD=<your_database_password>
-```
+    ./run_daily.sh
 
-4. Update the JIRA API token:
-- In the `main.py` file, replace `Bearer ************************HYPmCL` with your `JIRA API` token.
+    В этом скрипте у вас будет вызвана команда docker run с необходимыми опциями, включая имя вашего образа.
 
-## Usage
-
-Run the script by executing the following command:
-
-```bash
-python main.py
-```
-
-## Contributing
-
-Contributions are welcome! Please feel free to create a pull request.
-
-
+Теперь вы сможете собирать ваш образ и запускать контейнер с вашим приложением внутри Docker контейнера, используя эти команды.
