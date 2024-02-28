@@ -24,7 +24,7 @@ try:
 
     url = "https://jira.o3.ru/rest/api/2/search/"
     headers = {
-        "Authorization": "Bearer NzM4MDMzMjkyMjA5OnUjGSamWtzkl9sa0VsAydHYPmCL"
+        "Authorization": "Bearer <token_here>"
     }
 
     current_date = date.today()
