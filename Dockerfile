@@ -12,11 +12,19 @@ RUN pip install -r requirements.txt
 
 # Установка PostgreSQL
 RUN apt-get update && apt-get install -y postgresql
-RUN service postgresql start
+
+# Запуск PostgreSQL сервера
+RUN service postgresql start && service postgresql status
+
+# Добавление небольшой задержки перед получением статуса PostgreSQL
+RUN sleep 10
+
+# Ожидание готовности сервера PostgreSQL
+RUN while ! pg_isready -h localhost -p 5432 -U postgres; do sleep 1; done
 
 # Создание базы данных и пользователя (пример)
 RUN su - postgres -c "psql -c 'CREATE DATABASE postgres;'"
-RUN su - postgres -c "psql -c 'CREATE USER postgres WITH PASSWORD '\''Vbvbrf33'\'';'"
+RUN su - postgres -c "psql -c 'CREATE USER postgres WITH PASSWORD '\''passwd'\'';'"
 RUN su - postgres -c "psql -c 'GRANT ALL PRIVILEGES ON DATABASE postgres TO postgres;'"
 
 # Подключение к базе данных и создание таблицы
