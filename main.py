@@ -4,10 +4,13 @@ from datetime import date, timedelta
 from dotenv import load_dotenv
 import os
 
+# Загрузка переменных среды из файла .env
 load_dotenv()
 
+# Подключение к базе данных PostgreSQL
 try:
     conn = psycopg2.connect(
+        host=os.getenv("DB_HOST"),
         host=os.getenv("DB_HOST"),
         port=int(os.getenv("DB_PORT")),
         database=os.getenv("DB_NAME"),
