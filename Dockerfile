@@ -10,6 +10,28 @@ COPY . /app
 COPY requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
+# Установка PostgreSQL
+# RUN apt-get update && apt-get install -y postgresql
+
+# Запуск PostgreSQL сервера
+# RUN service postgresql start && echo service postgresql status
+
+# Добавление небольшой задержки перед получением статуса PostgreSQL
+# RUN sleep 10
+
+# Ожидание готовности сервера PostgreSQL
+# RUN while ! pg_isready -h localhost -p 5432 -U postgres; do sleep 1; done
+
+# Создание базы данных и пользователя (пример)
+# RUN su - postgres -c "psql -c 'CREATE DATABASE postgres;'"
+# RUN su - postgres -c "psql -c 'CREATE USER postgres WITH PASSWORD '\''passwd'\'';'"
+# RUN su - postgres -c "psql -c 'GRANT ALL PRIVILEGES ON DATABASE postgres TO postgres;'"
+
+# Подключение к базе данных и создание таблицы
+# RUN su - postgres -c "psql -d postgres -c 'CREATE TABLE tickets_retro (id SERIAL PRIMARY KEY, date DATE, total INT);'"
+RUN su - postgres -c "psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c 'CREATE TABLE tickets_retro (id SERIAL PRIMARY KEY, date DATE, total INT);'"
+
+
 # Добавление скрипта для запуска ежедневной задачи
 COPY run_daily.sh /app/run_daily.sh
 RUN chmod +x /app/run_daily.sh
@@ -19,9 +41,3 @@ RUN echo "0 3 * * * /app/run_daily.sh" >> /etc/crontab
 
 # Запуск cron в фоновом режиме
 CMD ["cron", "-f"]
-
-# Создание базы данных и таблицы
-RUN apt-get update && apt-get install -y postgresql-client
-
-RUN PGPASSWORD=passwd psql -h postgres_jira -U postgres -c "CREATE DATABASE IF NOT EXISTS postgres;"
-RUN PGPASSWORD=passwd psql -h postgres_jira -U postgres -d postgres -c "CREATE TABLE IF NOT EXISTS tickets_retro (id SERIAL PRIMARY KEY, date DATE, total INT);"
